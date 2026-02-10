@@ -1,0 +1,32 @@
+USE ctic;
+
+CREATE TABLE IF NOT EXISTS turmas (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(120) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS estagiarios (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(120) NOT NULL,
+  matricula VARCHAR(64) NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS turma_estagiarios (
+  turma_id INT UNSIGNED NOT NULL,
+  estagiario_id INT UNSIGNED NOT NULL,
+  PRIMARY KEY (turma_id, estagiario_id),
+  CONSTRAINT fk_te_turma FOREIGN KEY (turma_id) REFERENCES turmas(id) ON DELETE CASCADE,
+  CONSTRAINT fk_te_est FOREIGN KEY (estagiario_id) REFERENCES estagiarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS presencas (
+  turma_id INT UNSIGNED NOT NULL,
+  estagiario_id INT UNSIGNED NOT NULL,
+  data DATE NOT NULL,
+  presente TINYINT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (turma_id, estagiario_id, data),
+  CONSTRAINT fk_p_turma FOREIGN KEY (turma_id) REFERENCES turmas(id) ON DELETE CASCADE,
+  CONSTRAINT fk_p_est FOREIGN KEY (estagiario_id) REFERENCES estagiarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB;

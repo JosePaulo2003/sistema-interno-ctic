@@ -1,0 +1,24 @@
+# Configuracao local
+.env
+.env.*
+!.env.example
+
+# Uploads e arquivos gerados por usuarios
+uploads/*
+!uploads/.gitkeep
+!uploads/avatars/
+!uploads/avatars/.gitkeep
+
+# Logs, temporarios e caches
+*.log
+tmp/
+cache/
+__pycache__/
+*.pyc
+
+# Sistema/editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+.vscode/

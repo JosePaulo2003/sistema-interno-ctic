@@ -4,7 +4,8 @@ CREATE DATABASE IF NOT EXISTS ctic
   COLLATE utf8mb4_unicode_ci;
 
 -- 2) Usuário da aplicação (ajuste a senha!)
-CREATE USER IF NOT EXISTS 'ctic_app'@'localhost' IDENTIFIED BY 'ctic2025';
+-- Troque a senha abaixo antes de executar em producao.
+CREATE USER IF NOT EXISTS 'ctic_app'@'localhost' IDENTIFIED BY 'TROQUE_ESTA_SENHA';
 -- 3) Permissões
 GRANT ALL PRIVILEGES ON ctic.* TO 'ctic_app'@'localhost';
 FLUSH PRIVILEGES;

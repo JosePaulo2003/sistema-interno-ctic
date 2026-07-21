@@ -3,13 +3,18 @@
 ```mermaid
 sequenceDiagram
     actor Operador
-    participant Tela as Calendario
-    participant DB as Banco
+    participant Calendario
+    participant Banco
 
-    Operador->>Tela: seleciona turma e data
-    Tela->>DB: busca estagiarios
-    DB-->>Tela: retorna lista
-    Operador->>Tela: marca presentes
-    Tela->>DB: grava presencas
-    DB-->>Tela: confirma
+    Operador->>Calendario: seleciona turma, mes, ano e dia
+    Calendario->>Banco: SELECT turmas
+    Calendario->>Banco: SELECT estagiarios vinculados
+    Calendario->>Banco: SELECT presencas da data
+    Banco-->>Calendario: lista com marcacoes existentes
+    Operador->>Calendario: marca presenca[]
+    Calendario->>Banco: DELETE presencas da turma/data
+    Calendario->>Banco: INSERT IGNORE presencas presentes
+    Banco-->>Calendario: confirmacao
+    Operador->>Calendario: exporta CSV do mes
+    Calendario->>Banco: totaliza presencas por estagiario
 ```

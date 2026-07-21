@@ -4,5 +4,6 @@ Os diagramas foram separados para melhor visualização e organização.
 
 - [Casos de uso](uml/casos-de-uso.md)
 - [Arquitetura](uml/arquitetura.md)
-- [Entidades principais](uml/entidades.md)
+- [Modelo de dados](uml/entidades.md)
 - [Fluxo de presenca](uml/fluxo-presenca.md)
+- [Fluxo de login e perfil](uml/fluxo-login-perfil.md)

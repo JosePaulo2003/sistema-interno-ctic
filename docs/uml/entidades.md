@@ -1,23 +1,46 @@
-# Entidades principais
+# Modelo de dados
 
 ```mermaid
 classDiagram
     class Usuario {
-        int id
-        string username
-        string nome
-        string role
-        string avatar_path
+        INT_UNSIGNED id PK
+        VARCHAR_64 username UK
+        VARCHAR_120 nome
+        VARCHAR_255 password_hash
+        TIMESTAMP created_at
+        ENUM role
+        VARCHAR_255 avatar_path
     }
 
-    class Turma
-    class Estagiario
-    class TurmaEstagiario
-    class Presenca
+    class Turma {
+        INT_UNSIGNED id PK
+        VARCHAR_120 nome
+        TIMESTAMP created_at
+    }
 
-    Turma --> TurmaEstagiario : possui
-    Estagiario --> TurmaEstagiario : vinculado
-    Turma --> Presenca : registra
-    Estagiario --> Presenca : comparece
-    Usuario --> Presenca : opera
+    class Estagiario {
+        INT_UNSIGNED id PK
+        VARCHAR_120 nome
+        VARCHAR_64 matricula
+        TIMESTAMP created_at
+    }
+
+    class TurmaEstagiario {
+        INT_UNSIGNED turma_id PK,FK
+        INT_UNSIGNED estagiario_id PK,FK
+    }
+
+    class Presenca {
+        INT_UNSIGNED turma_id PK,FK
+        INT_UNSIGNED estagiario_id PK,FK
+        DATE data PK
+        TINYINT_1 presente
+    }
+
+    Turma "1" --> "0..*" TurmaEstagiario : turma_id
+    Estagiario "1" --> "0..*" TurmaEstagiario : estagiario_id
+    Turma "1" --> "0..*" Presenca : turma_id
+    Estagiario "1" --> "0..*" Presenca : estagiario_id
+    Usuario ..> Turma : administra
+    Usuario ..> Presenca : registra/exporta
 ```
